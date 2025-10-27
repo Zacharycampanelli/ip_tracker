@@ -1,0 +1,61 @@
+/* ================================
+   Color Tokens
+   ================================ */
+
+:root {
+  /* Base */
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* Gray scale */
+  --gray-950: #2C2C2C;
+  --gray-900: #3F3F3F;
+  --gray-500: #707070;
+  --gray-400: #959595;
+  --gray-200: #D8D8D8;
+  --gray-100: #EDEDED;
+
+  /* Accent */
+  --green-300: #3EFFCD;
+
+  /* Gradient */
+  --gradient-start: #5B86F2; /* left */
+  --gradient-end:   #443D97; /* right */
+
+  /* Optional semantic aliases */
+  --bg: var(--white);
+  --fg: var(--gray-950);
+  --muted: var(--gray-500);
+  --border: var(--gray-200);
+  --accent: var(--green-300);
+}/* ================================
+   Color Tokens
+   ================================ */
+
+:root {
+  /* Base */
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* Gray scale */
+  --gray-950: #2C2C2C;
+  --gray-900: #3F3F3F;
+  --gray-500: #707070;
+  --gray-400: #959595;
+  --gray-200: #D8D8D8;
+  --gray-100: #EDEDED;
+
+  /* Accent */
+  --green-300: #3EFFCD;
+
+  /* Gradient */
+  --gradient-start: #5B86F2; /* left */
+  --gradient-end:   #443D97; /* right */
+
+  /* Optional semantic aliases */
+  --bg: var(--white);
+  --fg: var(--gray-950);
+  --muted: var(--gray-500);
+  --border: var(--gray-200);
+  --accent: var(--green-300);
+}
