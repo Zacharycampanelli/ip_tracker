@@ -1,21 +1,30 @@
-import { Button, Input } from '@headlessui/react'
+import { Button, Input } from '@headlessui/react';
+import React, { useState } from 'react';
 
-import arrow from '../assets/svgr/Arrow.tsx';
+import Arrow from '../assets/svgr/Arrow.tsx';
 
 type IpInputProps = {
-    IpAddress?: string;
-    setIpAddress: (ip: string) => void;
-}
+  IpAddress?: string;
+  setIpAddress: (ip: string) => void;
+};
 
 const IpInput = ({ IpAddress, setIpAddress }: IpInputProps) => {
-    console.log(IpAddress)
+  const [value, setValue] = useState<string>(IpAddress || '');
+
+  const handleSubmit = (e?: React.FormEvent) => {
+    e?.preventDefault();
+
+    setIpAddress(value.trim());
+  };
+
   return (
-    <div className='input-wrapper'>
-    <Input defaultValue={IpAddress} className="ip-input"/>
-    <Button className="input-button" onClick={() => setIpAddress(IpAddress || '')}>{arrow}</Button>
-    </div>
-  )
-}
+    <form className="input-wrapper" onSubmit={handleSubmit}>
+      <Input value={value} onChange={(e) => setValue((e.target as HTMLInputElement).value)} className="ip-input" />
+      <Button type="submit" className="input-button">
+        <Arrow />
+      </Button>
+    </form>
+  );
+};
 
-
-export default IpInput
+export default IpInput;
