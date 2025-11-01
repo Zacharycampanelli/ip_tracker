@@ -1,6 +1,7 @@
+
 const DataCard = () => {
   return (
-    <div>
+    <div className="data-card">
       
     </div>
   )
