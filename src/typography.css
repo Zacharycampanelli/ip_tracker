@@ -50,6 +50,7 @@
   font-size: var(--text-3-size);
   line-height: var(--line-height-normal);
   letter-spacing: var(--tracking-tight);
+    margin: 8px 0 18px;
 }
 
 .text-preset-4 {
@@ -76,4 +77,5 @@
   line-height: var(--line-height-normal);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
+  margin: 0 0 8px;
 }
