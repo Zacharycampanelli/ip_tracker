@@ -3,8 +3,10 @@ import './App.css';
 
 import { useEffect, useState } from 'react';
 
+import { APIProvider } from '@vis.gl/react-google-maps';
 import DataCard from './components/DataCard.tsx';
 import IpInput from './components/IpInput';
+import MapView from './components/MapView.tsx';
 
 export type IpDataType = {
   location: string;
@@ -89,8 +91,11 @@ function App() {
   };
 
   return (
+    <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
     <div className="body-container">
-      <div>
+      <div className="card-container">
+        <div className='card'>
+          
         <h1 className="text-preset-2">IP Address Tracker</h1>
         <span className="background_image" />
         <IpInput
@@ -98,15 +103,18 @@ function App() {
           setIpData={setIpData}
           handleSearch={handleSearch}
           ipSearchInput={IpSearchInput}
-        />
+          />
         <DataCard
           location={IpData.location}
           timezone={IpData.timezone}
           isp={IpData.isp}
           ipAddress={IpData.ip_address}
-        />
+          />
+          </div>
       </div>
+      <MapView />
     </div>
+    </APIProvider>
   );
 }
 

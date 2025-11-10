@@ -24,7 +24,6 @@ h1 {
   align-items: center;
   justify-content: start;
   padding: var(--spacing-400) var(--spacing-200);
-  gap: var(--spacing-300);
   background-color: var(--bg-white);
   min-height: 100vh;
   box-sizing: border-box;
@@ -71,6 +70,14 @@ input {
   overflow: hidden;
 }
 
+/* .card-container {
+  position: relative;
+}
+
+.card {
+  position: absolute;
+} */
+
 .input-button {
   background: var(--black);
   height: 100%;
@@ -84,7 +91,6 @@ input {
 .data-card {
   background: var(--white);
   width: 100%;
-
   max-width: 327px;
   max-height: 279px;
   border-radius: 15px;
@@ -108,5 +114,8 @@ input {
 }
 
 #map {
-  height: 500px
+  height: 500px;
+  width: 100vw;
+
+  margin: 0;
 }
