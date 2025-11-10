@@ -25,18 +25,16 @@ function App() {
   });
   const [coordinates, setCoordinates] = useState<{ lat: number; lng: number }>({
     lat: 0,
-    lng: 0
+    lng: 0,
   });
 
   useEffect(() => {
     const fetchIp = async () => {
       try {
-        const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${
-          import.meta.env.VITE_IPIFY_API_KEY
-        }`;
+        const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${import.meta.env.VITE_IPIFY_API_KEY}`;
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         formatData(data);
         setIpSearchInput(data.ip);
       } catch (error) {
@@ -52,9 +50,7 @@ function App() {
 
   const getZipCode = async (ipAddress: string) => {
     try {
-      const url = `https://ipinfo.io/${ipAddress}/json?token=${
-        import.meta.env.VITE_IPINFO_API_KEY
-      }`;
+      const url = `https://ipinfo.io/${ipAddress}/json?token=${import.meta.env.VITE_IPINFO_API_KEY}`;
       const response = await fetch(url);
       const data = await response.json();
       return data.postal;
@@ -73,8 +69,8 @@ function App() {
     });
     setCoordinates({
       lat: data.location.lat,
-      lng: data.location.lng
-    })
+      lng: data.location.lng,
+    });
   };
 
   const handleSearch = async () => {
@@ -92,28 +88,27 @@ function App() {
 
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-    <div className="body-container">
-      <div className="card-container">
-        <div className='card'>
-          
-        <h1 className="text-preset-2">IP Address Tracker</h1>
-        <span className="background_image" />
-        <IpInput
-          ipData={IpData.ip_address}
-          setIpData={setIpData}
-          handleSearch={handleSearch}
-          ipSearchInput={IpSearchInput}
-          />
-        <DataCard
-          location={IpData.location}
-          timezone={IpData.timezone}
-          isp={IpData.isp}
-          ipAddress={IpData.ip_address}
-          />
+      <div className="body-container">
+        <div className="card-container">
+          <div className="card">
+            <h1 className="text-preset-2">IP Address Tracker</h1>
+            <span className="background_image" />
+            <IpInput
+              ipData={IpData.ip_address}
+              setIpData={setIpData}
+              handleSearch={handleSearch}
+              ipSearchInput={IpSearchInput}
+            />
           </div>
+        </div>
+        <MapView />
+            <DataCard
+              location={IpData.location}
+              timezone={IpData.timezone}
+              isp={IpData.isp}
+              ipAddress={IpData.ip_address}
+            />
       </div>
-      <MapView />
-    </div>
     </APIProvider>
   );
 }
