@@ -101,7 +101,7 @@ function App() {
             />
           </div>
         </div>
-        <MapView />
+        <MapView coordinates={coordinates}  />
             <DataCard
               location={IpData.location}
               timezone={IpData.timezone}

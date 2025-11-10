@@ -1,8 +1,13 @@
 import { Map } from "@vis.gl/react-google-maps"
-const MapView = () => {
+
+type MapViewProps = {
+  coordinates: { lat: number; lng: number };
+}
+
+const MapView = ({ coordinates }: MapViewProps) => {
   return (
     <div id="map">
-    <Map defaultZoom={13} center={{ lat: 0, lng: 0 }} id="map" />  
+    <Map defaultZoom={13} center={{ lat: coordinates.lat, lng: coordinates.lng }} disableDefaultUI={true} id="map" />  
     </div>
   )
 }
