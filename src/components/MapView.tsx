@@ -1,20 +1,35 @@
-import {
- Map,
- Marker
-} from "@vis.gl/react-google-maps"
+import { AdvancedMarker, Map } from '@vis.gl/react-google-maps';
 
 type MapViewProps = {
-  coordinates: { lat: number; lng: number };
-}
+  coordinates: { lat: number | string; lng: number | string };
+};
 
 const MapView = ({ coordinates }: MapViewProps) => {
+
+  const lat = Number(coordinates.lat);
+  const lng = Number(coordinates.lng);
+
+  const markerPosition = { lat, lng };
+
+  const mapCenter = {
+    lat: lat + 0.004,
+    lng: lng
+  }
+  
   return (
     <div id="map">
-      <Map defaultZoom={13} center={{ lat: coordinates.lat, lng: coordinates.lng }} disableDefaultUI={true} id="map">
-        <Marker position={{ lat: coordinates.lat, lng: coordinates.lng }} icon={{url:"/icon-location.svg", scaledSize: { width: 48, height:64 } }} />
+      <Map
+        defaultZoom={13}
+        center={mapCenter}
+        disableDefaultUI={true}
+        mapId="map"
+      >
+        <AdvancedMarker position={markerPosition}>
+          <img src="/icon-location.svg" alt="Location Icon" />
+        </AdvancedMarker>
       </Map>
     </div>
-  )
-}    
+  );
+};
 
-export default MapView
+export default MapView;

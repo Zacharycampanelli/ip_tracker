@@ -44,9 +44,9 @@ function App() {
     fetchIp();
   }, []);
 
-  // const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setIpSearchInput(e.target.value);
-  // };
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIpSearchInput(e.target.value);
+  };
 
   const getZipCode = async (ipAddress: string) => {
     try {
@@ -75,9 +75,7 @@ function App() {
 
   const handleSearch = async () => {
     try {
-      const url = `https://geo.ipify.org/api/v2/country?apiKey=${
-        import.meta.env.VITE_IPIFY_API_KEY
-      }&ipAddress=${IpSearchInput}`;
+      const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${import.meta.env.VITE_IPIFY_API_KEY}&ipAddress=${IpSearchInput}`;
       const response = await fetch(url);
       const data = await response.json();
       formatData(data);
@@ -94,10 +92,9 @@ function App() {
             <h1 className="text-preset-2">IP Address Tracker</h1>
             <span className="background_image" />
             <IpInput
-              ipData={IpData.ip_address}
-              setIpData={setIpData}
-              handleSearch={handleSearch}
-              ipSearchInput={IpSearchInput}
+              value={IpSearchInput}
+              onChange={handleSearchInput}
+              onSubmit={handleSearch}
             />
           </div>
         </div>

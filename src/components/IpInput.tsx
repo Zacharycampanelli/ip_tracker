@@ -1,41 +1,28 @@
 import { Button, Input } from '@headlessui/react';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import Arrow from '../assets/svgr/Arrow.tsx';
-import type { IpDataType } from '../App.tsx';
 
 type IpInputProps = {
-  ipData?: IpDataType;
-  setIpData: (data: IpDataType) => void;
-  handleSearch?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  ipSearchInput?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit?: () => void;
 };
 
-const IpInput = ({ ipData, setIpData, handleSearch, ipSearchInput }: IpInputProps) => {
-
-  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setIpData({
-  //     ip_addresss: e.target.value,
-  //     location: ipData?.location ?? '',
-  //     timezone: ipData?.timezone ?? '',
-  //     isp: ipData?.isp ?? '',
-  //   });
-  // };
-
+const IpInput = ({ value, onChange, onSubmit }: IpInputProps) => {
   const handleSubmit = (e?: React.FormEvent) => {
     e?.preventDefault();
-
-    setIpData({
-      ip_address: ipSearchInput ?? ipData?.ip_address ?? '',
-      location: ipData?.location ?? '',
-      timezone: ipData?.timezone ?? '',
-      isp: ipData?.isp ?? '',
-    });
+    onSubmit?.();
   };
 
   return (
     <form className="input-wrapper" onSubmit={handleSubmit}>
-      <Input value={ipSearchInput} onChange={(e) => handleSearch?.(e)} onBlur={handleSubmit} className="ip-input text-preset-4" />
+      <Input
+        value={value}
+        onChange={onChange}
+        onBlur={handleSubmit}
+        className="ip-input text-preset-4"
+      />
       <Button type="submit" className="input-button">
         <Arrow />
       </Button>
