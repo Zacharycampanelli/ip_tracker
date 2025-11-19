@@ -5,7 +5,6 @@ type MapViewProps = {
 };
 
 const MapView = ({ coordinates }: MapViewProps) => {
-
   const lat = Number(coordinates.lat);
   const lng = Number(coordinates.lng);
 
@@ -13,17 +12,12 @@ const MapView = ({ coordinates }: MapViewProps) => {
 
   const mapCenter = {
     lat: lat + 0.004,
-    lng: lng
-  }
-  
+    lng: lng,
+  };
+
   return (
     <div id="map">
-      <Map
-        defaultZoom={13}
-        center={mapCenter}
-        disableDefaultUI={true}
-        mapId="map"
-      >
+      <Map defaultZoom={13} center={mapCenter} disableDefaultUI={true} mapId="map">
         <AdvancedMarker position={markerPosition}>
           <img src="/icon-location.svg" alt="Location Icon" />
         </AdvancedMarker>
