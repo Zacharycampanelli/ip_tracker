@@ -87,24 +87,28 @@ function App() {
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <div className="body-container">
+            <span className="background_image" />
         <div className="card-container">
           <div className="card">
             <h1 className="text-preset-2">IP Address Tracker</h1>
-            <span className="background_image" />
+            <div class="search-section">
+              
+            
             <IpInput
               value={IpSearchInput}
               onChange={handleSearchInput}
               onSubmit={handleSearch}
             />
+              <DataCard
+                location={IpData.location}
+                timezone={IpData.timezone}
+                isp={IpData.isp}
+                ipAddress={IpData.ip_address}
+              />
           </div>
         </div>
+        </div>
         <MapView coordinates={coordinates}  />
-            <DataCard
-              location={IpData.location}
-              timezone={IpData.timezone}
-              isp={IpData.isp}
-              ipAddress={IpData.ip_address}
-            />
       </div>
     </APIProvider>
   );
