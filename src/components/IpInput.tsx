@@ -1,7 +1,8 @@
 import { Button, Input } from '@headlessui/react';
-import React from 'react';
 
 import Arrow from '../assets/svgr/Arrow.tsx';
+import React from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 type IpInputProps = {
   value: string;
@@ -10,6 +11,10 @@ type IpInputProps = {
 };
 
 const IpInput = ({ value, onChange, onSubmit }: IpInputProps) => {
+ 
+ const isMobile = useMediaQuery({ query: '(max-width: 768px)'
+  }); 
+ 
   const handleSubmit = (e?: React.FormEvent) => {
     e?.preventDefault();
     onSubmit?.();

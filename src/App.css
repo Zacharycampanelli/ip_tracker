@@ -157,3 +157,23 @@ input {
 .data-card-item .text-preset-6 {
   opacity: 0.5;
 }
+
+
+@media (min-width: 768px) {
+  .data-card {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: var(--spacing-400) var(--spacing-600);
+  }
+
+  .data-card-item {
+    text-align: left;width: 44%
+  }
+
+  .data-card-item:nth-child(odd) {
+    border-right: 1px solid var(--border);
+    padding-right: var(--spacing-600);
+    margin-right: var(--spacing-600);
+  }
+}
