@@ -31,7 +31,8 @@ function App() {
   useEffect(() => {
     const fetchIp = async () => {
       try {
-        const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${import.meta.env.VITE_IPIFY_API_KEY}`;
+        console.log(import.meta.env.VITE_IP_STACK_API_KEY)
+        const url = ` https://api.ipstack.com/check??access_key=${import.meta.env.VITE_IP_STACK_API_KEY}`;
         const response = await fetch(url);
         const data = await response.json();
         console.log(data);

@@ -8,12 +8,17 @@ type DataCardProps = {
 };
 
 const DataCard = ({ ipAddress, location, timezone, isp }: DataCardProps) => {
+  const items =[
+    { label: 'IP Address', value: ipAddress },
+    { label: 'Location', value: location },
+    { label: 'Timezone', value: timezone },
+    { label: 'ISP', value: isp },
+  ]
   return (
     <div className="data-card">
-      <DataCardItem data={ipAddress} />
-      <DataCardItem data={location} />
-      <DataCardItem data={timezone} />
-      <DataCardItem data={isp} />
+      {items.map((item) => (
+        <DataCardItem key={item.label} label={item.label} data={item.value} />
+      ))}
     </div>
   );
 };
