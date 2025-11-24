@@ -7,6 +7,7 @@ import { APIProvider } from '@vis.gl/react-google-maps';
 import DataCard from './components/DataCard.tsx';
 import IpInput from './components/IpInput';
 import MapView from './components/MapView.tsx';
+import { useBreakpoints } from './hooks/useBreakpoints.ts';
 
 export type IpDataType = {
   location: string;
@@ -28,7 +29,8 @@ function App() {
     lng: 0,
   });
 
-  useEffect(() => {
+  const {isMobile} = useBreakpoints();
+    useEffect(() => {
     const fetchIp = async () => {
       try {
         console.log(import.meta.env.VITE_IP_STACK_API_KEY)
@@ -91,8 +93,8 @@ function App() {
             <span className="background_image" />
         <div className="card-container">
           <div className="card">
-            <h1 className="text-preset-2">IP Address Tracker</h1>
-            <div class="search-section">
+            <h1 className={isMobile ? `text-preset-2` : 'text-preset-1'}>IP Address Tracker</h1>
+            <div className="search-section">
               
             
             <IpInput

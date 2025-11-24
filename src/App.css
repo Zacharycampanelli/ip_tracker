@@ -1,16 +1,9 @@
-/* ================================
-   1. Imports
-   ================================ */
-
+/* src/App.css */
+/* ... (Imports and Global Reset remain same) ... */
 @import url('./colors.css');
 @import url('./typography.css');
 @import url('./spacing.css');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
-
-
-/* ================================
-   2. Global / Reset
-   ================================ */
 
 *,
 *::before,
@@ -28,7 +21,6 @@ body {
   background-color: var(--bg-white);
 }
 
-
 /* ================================
    3. Layout
    ================================ */
@@ -39,6 +31,7 @@ body {
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
+  max-height: 100vh;
   position: relative;
   z-index: 1;
 }
@@ -58,17 +51,18 @@ body {
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-300);
-  width: 100%;
-  width: 87.5vw;  
-  max-width: 600px; 
+  width: 87.5vw;
+  max-width: 600px;
 }
 
+/* UPDATED: Map fills remaining space */
 #map {
-  height: 62.5vh;
   width: 100vw;
-  margin: 0;
+  height: 100%;
+  position: relative;
+  z-index: 1; /* Take up remaining vertical space */
+  min-height: 60vh; /* Ensure map is always visible */
 }
-
 
 /* ================================
    4. Typography
@@ -78,7 +72,6 @@ h1 {
   text-align: center;
   color: var(--white);
 }
-
 
 /* ================================
    5. Form / Input
@@ -92,6 +85,8 @@ h1 {
   height: 64px;
   border-radius: 15px;
   overflow: hidden;
+  max-width: 555px;
+
 }
 
 input {
@@ -115,25 +110,32 @@ input {
   cursor: pointer;
 }
 
-
 /* ================================
    6. Card / Data Panel
    ================================ */
 
+/* UPDATED: Allow container to grow with content */
 .card-container {
-  height: 37.5vh;
+  min-height: auto;
+  height: auto;
+  padding-bottom: var(--spacing-600); /* Add some breathing room at bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card {
   padding: var(--spacing-400) var(--spacing-200) 0;
   width: 87.5vw;
-   display: flex;               
-  flex-direction: column;      
-  align-items: center;       
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* UPDATED: Relative positioning with transform overlap */
 .data-card {
   width: 100%;
+  max-width: 600px;
   background: var(--white);
   border-radius: 15px;
   padding: var(--spacing-400);
@@ -144,9 +146,12 @@ input {
   justify-content: space-between;
   gap: var(--spacing-100);
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+
+  /* Key changes for positioning */
+  position: relative; /* Keep in flow so it pushes map down */
+  margin-bottom: var(--spacing-1000); /* Space below card */
+  z-index: 10; /* Ensure it sits on top of the map */
   margin-top: var(--spacing-300);
-  position: static;
-  z-index: 1;
 }
 
 .data-card-item {
@@ -158,22 +163,59 @@ input {
   opacity: 0.5;
 }
 
-
 @media (min-width: 768px) {
+  .background_image {
+    height: 30%;
+    background-image: url('./assets/images/pattern-bg-desktop.png');
+  }
+
   .data-card {
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     padding: var(--spacing-400) var(--spacing-600);
-  }
+    max-width: 555px;  }
 
   .data-card-item {
-    text-align: left;width: 44%
+    text-align: left;
+    width: auto; /* Allow auto width on desktop or use percentage if needed */
+    flex: 1; /* Distribute space evenly */
+    min-width: 44%;
   }
 
   .data-card-item:nth-child(odd) {
+    /* Check if you still want borders on odd items or between all items */
     border-right: 1px solid var(--border);
-    padding-right: var(--spacing-600);
-    margin-right: var(--spacing-600);
+    padding-right: var(--spacing-400);
+    margin-right: var(--spacing-400);
+  }
+
+  /* Remove border from the last item */
+  .data-card-item:last-child {
+    border-right: none;
+    padding-right: 0;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .data-card {
+    width: 75vw;
+  }
+}
+
+@media (min-width: 1440px) {
+  .data-card {
+    flex-wrap: nowrap;
+    min-width: 1150px;
+    margin-top: var(--spacing-500);
+  }
+
+  .data-card-item {
+    min-width: auto;
+    border-right: 1px solid var(--border);
+    padding-right: var(--spacing-400);
+    margin-right: var(--spacing-400);
+  
   }
 }
