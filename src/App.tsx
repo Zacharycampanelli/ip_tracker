@@ -8,110 +8,43 @@ import DataCard from './components/DataCard.tsx';
 import IpInput from './components/IpInput';
 import MapView from './components/MapView.tsx';
 import { useBreakpoints } from './hooks/useBreakpoints.ts';
-
-export type IpDataType = {
-  location: string;
-  timezone: string;
-  isp: string;
-  ip_address: string;
-};
+import { useIpTracker } from './hooks/useIpTracker.ts';
 
 function App() {
-  const [IpSearchInput, setIpSearchInput] = useState('');
-  const [IpData, setIpData] = useState<IpDataType>({
-    location: '',
-    timezone: '',
-    isp: '',
-    ip_address: '',
-  });
-  const [coordinates, setCoordinates] = useState<{ lat: number; lng: number }>({
-    lat: 0,
-    lng: 0,
-  });
-
-  const {isMobile} = useBreakpoints();
-    useEffect(() => {
-    const fetchIp = async () => {
-      try {
-        console.log(import.meta.env.VITE_IP_STACK_API_KEY)
-        const url = ` https://api.ipstack.com/check??access_key=${import.meta.env.VITE_IP_STACK_API_KEY}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log(data);
-        formatData(data);
-        setIpSearchInput(data.ip);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const { isMobile } = useBreakpoints();
+  
+  const { 
+    IpData, 
+    IpSearchInput, 
+    coordinates, 
+    fetchIp, 
+    handleSearch, 
+    handleSearchInput 
+  } = useIpTracker();
+  
+  useEffect(() => {
     fetchIp();
   }, []);
-
-  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIpSearchInput(e.target.value);
-  };
-
-  const getZipCode = async (ipAddress: string) => {
-    try {
-      const url = `https://ipinfo.io/${ipAddress}/json?token=${import.meta.env.VITE_IPINFO_API_KEY}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      return data.postal;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const formatData = async (data: any) => {
-    const zipcode = await getZipCode(data.ip);
-    setIpData({
-      ip_address: data.ip,
-      location: `${data.location.region}, ${data.location.country} ${zipcode}`,
-      timezone: `UTC ${data.location.timezone}`,
-      isp: data.isp,
-    });
-    setCoordinates({
-      lat: data.location.lat,
-      lng: data.location.lng,
-    });
-  };
-
-  const handleSearch = async () => {
-    try {
-      const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${import.meta.env.VITE_IPIFY_API_KEY}&ipAddress=${IpSearchInput}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      formatData(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <div className="body-container">
-            <span className="background_image" />
+        <span className="background_image" />
         <div className="card-container">
           <div className="card">
             <h1 className={isMobile ? `text-preset-2` : 'text-preset-1'}>IP Address Tracker</h1>
             <div className="search-section">
-              
-            
-            <IpInput
-              value={IpSearchInput}
-              onChange={handleSearchInput}
-              onSubmit={handleSearch}
-            />
+              <IpInput value={IpSearchInput} onChange={handleSearchInput} onSubmit={handleSearch} />
               <DataCard
                 location={IpData.location}
                 timezone={IpData.timezone}
                 isp={IpData.isp}
                 ipAddress={IpData.ip_address}
               />
+            </div>
           </div>
         </div>
-        </div>
-        <MapView coordinates={coordinates}  />
+        <MapView coordinates={coordinates} />
       </div>
     </APIProvider>
   );
