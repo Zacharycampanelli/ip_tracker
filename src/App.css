@@ -86,7 +86,6 @@ h1 {
   border-radius: 15px;
   overflow: hidden;
   max-width: 555px;
-
 }
 
 input {
@@ -98,6 +97,7 @@ input {
   height: 100%;
   flex: 1;
   background: var(--white);
+  cursor: pointer;
 }
 
 .input-button {
@@ -107,6 +107,13 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+}
+
+.input-button:hover {
+  background: var(--gray-400);
   cursor: pointer;
 }
 
@@ -174,7 +181,8 @@ input {
     align-items: center;
     flex-wrap: wrap;
     padding: var(--spacing-400) var(--spacing-600);
-    max-width: 555px;  }
+    max-width: 555px;
+  }
 
   .data-card-item {
     text-align: left;
@@ -208,7 +216,7 @@ input {
   .data-card {
     flex-wrap: nowrap;
     min-width: 1150px;
-    margin-top: var(--spacing-500);
+    margin-top: var(--spacing-600);
   }
 
   .data-card-item {
@@ -216,6 +224,5 @@ input {
     border-right: 1px solid var(--border);
     padding-right: var(--spacing-400);
     margin-right: var(--spacing-400);
-  
   }
 }
