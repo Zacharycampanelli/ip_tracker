@@ -23,7 +23,6 @@ const IpInput = ({ value, onChange, onSubmit }: IpInputProps) => {
       <Input
         value={value}
         onChange={onChange}
-        onBlur={handleSubmit}
         className="ip-input text-preset-4"
       />
       <Button type="submit" className="input-button">

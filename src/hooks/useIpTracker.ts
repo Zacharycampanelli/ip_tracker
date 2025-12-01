@@ -25,6 +25,8 @@ export const useIpTracker = () => {
 
   const [IpSearchInput, setIpSearchInput] = useState('');
 
+  const [error, setError] = useState<string | null>(null);
+  
   // 4. Define Helper functions INSIDE the function (so they can access 'set' functions)
   const getZipCode = async (ipAddress: string) => {
     try {
@@ -33,7 +35,7 @@ export const useIpTracker = () => {
       const data = await response.json();
       return data.postal;
     } catch (error) {
-      console.log(error);
+      setError(`Failed to fetch zip code: ${error}`);
     }
   };
 
@@ -60,7 +62,7 @@ export const useIpTracker = () => {
       formatData(data);
       setIpSearchInput(data.ip);
     } catch (error) {
-      console.log(error);
+      setError(`Failed to fetch IP data: ${error}`);
     }
   };
 
@@ -71,7 +73,7 @@ export const useIpTracker = () => {
       const data = await response.json();
       formatData(data);
     } catch (error) {
-      console.log(error);
+      setError(`Failed to fetch searched IP data: ${error}`);
     }
   };
 
