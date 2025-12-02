@@ -56,7 +56,7 @@ export const useIpTracker = () => {
 
   const fetchIp = async () => {
     try {
-      const url = `https://api.ipstack.com/check?access_key=${importzb.meta.env.VITE_IP_STACK_API_KEY}`;
+      const url = `https://api.ipstack.com/check?access_key=${import.meta.env.VITE_IP_STACK_API_KEY}`;
       const response = await fetch(url);
       const data = await response.json();
       formatData(data);
